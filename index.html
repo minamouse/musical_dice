@@ -1,1 +1,46 @@
-Hello World
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="module" defer>
+      import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
+
+      document.getElementById('action').addEventListener('click', async () => {
+        // Initialize default ChucK object, if not already initialized
+        window.theChuck ??= await Chuck.init([]);
+        // Run ChucK code
+        theChuck.runCode(`
+            me.dir() + "audio_files/horizdisplidoffmic1.wav" => string filename;
+            SndBuf buf(filename);
+
+            me.dir() + "audio_files/horizdisplidoffmic2.wav" => string filename2;
+            SndBuf buf2(filename2);
+            0 => int measures;
+
+            while(measures < 6)
+            {
+                if (measures == 0) {
+                    0 => buf.pos;
+                    buf => dac;
+                }
+                if (measures == 1) {
+                    0 => buf2.pos;
+                    buf2 => dac;
+                }
+                1 + measures => measures;
+                10000::ms => now;
+            }
+        `);
+      });
+    </script>
+  </head>
+<body>
+
+<h1>Mozart's Musical Dice Game</h1>
+
+<button id="action">Start and Play</button>
+
+<p id="demo"></p>
+
+</body>
+</html>
+
