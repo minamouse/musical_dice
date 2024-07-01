@@ -1,8 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://www.verovio.org/javascript/latest/verovio-toolkit-wasm.js" defer></script>
     <script type="module" defer>
       import { Chuck } from 'https://cdn.jsdelivr.net/npm/webchuck/+esm';
+
+      document.addEventListener("DOMContentLoaded", (event) => {
+          verovio.module.onRuntimeInitialized = () => {
+            let tk = new verovio.toolkit();
+            console.log("Verovio has loaded!");
+            fetch("https://github.com/DCMLab/ABC/blob/main/reviewed/n01op18-1_01_reviewed.mscx")
+              .then( (response) => response.text() )
+              .then( (meiXML) => {
+                let svg = tk.renderData(meiXML, {});
+                document.getElementById("notation").innerHTML = svg;
+              });
+          }
+      });
 
       document.getElementById('action').addEventListener('click', async () => {
         // Initialize default ChucK object, if not already initialized
@@ -39,6 +53,7 @@
 <h1>Mozart's Musical Dice Game</h1>
 
 <button id="action">Start and Play</button>
+<div id="notation"></div>
 
 <p id="demo"></p>
 
