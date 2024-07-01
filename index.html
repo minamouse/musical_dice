@@ -9,7 +9,7 @@
           verovio.module.onRuntimeInitialized = () => {
             let tk = new verovio.toolkit();
             console.log("Verovio has loaded!");
-            fetch("https://github.com/DCMLab/ABC/blob/main/reviewed/n01op18-1_01_reviewed.mscx")
+            fetch("cda000.krn")
               .then( (response) => response.text() )
               .then( (meiXML) => {
                 let svg = tk.renderData(meiXML, {});
