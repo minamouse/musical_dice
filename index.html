@@ -8,11 +8,12 @@
         // Initialize default ChucK object, if not already initialized
         window.theChuck ??= await Chuck.init([]);
         // Run ChucK code
+        await window.theChuck.loadFile("./audio_files/horizdisplidoffmic1.wav");
+        await window.theChuck.loadFile("./audio_files/horizdisplidoffmic2.wav");
         theChuck.runCode(`
-            me.dir() + "audio_files/horizdisplidoffmic1.wav" => string filename;
+            me.dir() + "horizdisplidoffmic1.wav" => string filename;
             SndBuf buf(filename);
-
-            me.dir() + "audio_files/horizdisplidoffmic2.wav" => string filename2;
+            me.dir() + "horizdisplidoffmic2.wav" => string filename2;
             SndBuf buf2(filename2);
             0 => int measures;
 
